@@ -6,3 +6,6 @@ ta
 requests
 zipfile36
 matplotlib
+pymysql 
+python-dotenv
+sqlalchemy
