@@ -16,14 +16,23 @@ from ta.momentum import RSIIndicator
 from sqlalchemy import create_engine
 
 # Load environment variables
-load_dotenv()
+# load_dotenv()
+
+db_config = st.secrets["mySQL"]
 
 # Retrieve MySQL credentials from .env file
-MYSQL_HOST = os.getenv("MYSQL_HOST")
-MYSQL_PORT = int(os.getenv("MYSQL_PORT", 3306))
-MYSQL_USER = os.getenv("MYSQL_USER")
-MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
-MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
+# MYSQL_HOST = os.getenv("MYSQL_HOST")
+# MYSQL_PORT = int(os.getenv("MYSQL_PORT", 3306))
+# MYSQL_USER = os.getenv("MYSQL_USER")
+# MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+# MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
+
+MYSQL_HOST = db_config["MYSQL_HOST"]
+MYSQL_PORT = db_config["MYSQL_PORT"]
+MYSQL_USER = db_config["MYSQL_USER"]
+MYSQL_PASSWORD = db_config["MYSQL_PASSWORD"]
+MYSQL_DATABASE = db_config["MYSQL_DATABASE"]
+
 
 TABLE_NAME='vnieod'
 
@@ -158,6 +167,8 @@ def plot_macd_chart(ticker, exchange, df):
 st.title("Stock Analysis Tool")
 selected_date = st.date_input("Select Date", datetime.today(), format="YYYY-MM-DD")
 date_str = selected_date.strftime("%Y%m%d")
+
+# st.write("DB MYSQL_URL:", st.secrets["MYSQL_URL"])
 
 max_date = check_database()
 if max_date:
