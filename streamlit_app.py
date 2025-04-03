@@ -176,7 +176,8 @@ if max_date:
     
     st.write('date diff:', date_diff.days)
 
-    if st.button("Refresh Database"):
+    if st.button("Refresh Database", disabled=True):
+        st.session_state.disabled = True
         while max_date <= selected_date:
 
             if download_and_extract_zip(date_str, is_initializing=False):
